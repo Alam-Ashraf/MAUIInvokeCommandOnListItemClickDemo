@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MAUIInvokeCommandOnListItemClickDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="MainPageContainer">
+
+    <Grid
+        Padding="30,5"
+        HorizontalOptions="Fill"
+        RowDefinitions="*,Auto"
+        RowSpacing="10"
+        VerticalOptions="Fill">
+
+        <CollectionView
+            Grid.Row="0"
+            Margin="0,30,0,0"
+            ItemsSource="{Binding UserList}"
+            SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="3" CornerRadius="0">
+                        <StackLayout
+                            Padding="10"
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Horizontal"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                x:Name="UserName"
+                                HorizontalOptions="FillAndExpand"
+                                Text="{Binding .}"
+                                TextColor="Black" />
+                            <Frame
+                                Padding="7"
+                                CornerRadius="15"
+                                HeightRequest="30"
+                                HorizontalOptions="EndAndExpand"
+                                WidthRequest="30">
+                                <Image Source="delete_user.png" />
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.DeleteUserCommand, Source={x:Reference MainPageContainer}}" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <VerticalStackLayout Grid.Row="1">
+
+            <Entry Placeholder="Type name" Text="{Binding User}" />
+
+            <Button
+                Margin="0,10,0,0"
+                Command="{Binding AddUserCommand}"
+                HorizontalOptions="CenterAndExpand"
+                Text="Add User" />
+
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>
