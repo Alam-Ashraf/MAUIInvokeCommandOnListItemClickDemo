@@ -7,10 +7,10 @@ namespace MAUIInvokeCommandOnListItemClickDemo
     public partial class MainPageViewModel : ObservableObject
     {
         [ObservableProperty]
-        ObservableCollection<string> userList;
+        private ObservableCollection<string> userList;
 
         [ObservableProperty]
-        string user;
+        private string user;
 
         public MainPageViewModel()
         {
@@ -18,7 +18,7 @@ namespace MAUIInvokeCommandOnListItemClickDemo
         }
 
         [RelayCommand]
-        void AddUser()
+        public void AddUser()
         {
             Application.Current.Dispatcher.Dispatch(() =>
             {
@@ -31,7 +31,7 @@ namespace MAUIInvokeCommandOnListItemClickDemo
         }
 
         [RelayCommand]
-        void DeleteUser(string user)
+        public void DeleteUser(string user)
         {
             Application.Current.Dispatcher.Dispatch(() =>
             {
@@ -41,6 +41,7 @@ namespace MAUIInvokeCommandOnListItemClickDemo
                 }
             });
         }
+
         private void GetUserList()
         {
             UserList = new ObservableCollection<string>()
